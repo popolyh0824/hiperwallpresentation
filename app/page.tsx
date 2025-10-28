@@ -399,7 +399,7 @@ const slides = [
               <li>• 투명도 제어 (0-100%)</li>
               <li>• HiperInterface로 애니메이션</li>
               <li>• 벽면 크기에 비례한 두께</li>
-              <li>• 두께 조정 가능 (얇게/보통/두껍게)</li>
+              <li>• 테두리의 ON/OFF</li>
             </ul>
           </div>
         </div>
