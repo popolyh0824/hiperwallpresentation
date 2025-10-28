@@ -404,7 +404,7 @@ const slides = [
           </div>
         </div>
 
-        <div className="bg-yellow-50 dark:bg-yellow-950 p-5 rounded-lg">
+        <div className="bg-yellow-50 dark:bg-yellow-900 p-5 rounded-lg">
           <h4 className="font-semibold text-yellow-700 dark:text-yellow-300 mb-2">활용 예시</h4>
           <p className="text-base">
             긴급 상황 시 경고 콘텐츠에 빨간 테두리를 깜빡이게 하거나, VIP 방문 시 중요 카메라 피드에 라벨과 테두리를
@@ -644,16 +644,6 @@ const slides = [
             </div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    title: "Q&A",
-    content: (
-      <div className="flex flex-col items-center justify-center h-full">
-        <div className="text-6xl mb-8">💬</div>
-        <h2 className="text-5xl font-bold mb-6">질문 있으시면</h2>
-        <h2 className="text-5xl font-bold">말씀해주세요!</h2>
       </div>
     ),
   },
