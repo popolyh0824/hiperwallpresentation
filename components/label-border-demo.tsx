@@ -85,7 +85,7 @@ export function LabelBorderDemo() {
       </div>
 
       {/* Preview */}
-      <div className="bg-slate-100 dark:bg-slate-800 p-12 rounded-lg overflow-hidden">
+      <div className="bg-slate-100 dark:bg-slate-800 p-12 rounded-lg overflow-hidden px-12">
         <div className="flex items-center justify-center">
           <div
             className="relative h-40 w-64 rounded transition-transform"
@@ -115,7 +115,7 @@ export function LabelBorderDemo() {
             </div>
           </div>
         </div>
-        <p className="text-xs text-center text-muted-foreground mb-[18px] mt-[55px]">
+        <p className="text-xs text-center text-muted-foreground mb-0 mt-[29px]">
           콘텐츠의 투명도와 기울기를 조절하고 라벨과 테두리를 켜고 끌 수 있습니다
         </p>
       </div>
