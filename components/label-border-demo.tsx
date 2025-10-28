@@ -115,7 +115,7 @@ export function LabelBorderDemo() {
             </div>
           </div>
         </div>
-        <p className="text-xs text-center text-muted-foreground mt-3">
+        <p className="text-xs text-center text-muted-foreground mb-[18px] mt-[55px]">
           콘텐츠의 투명도와 기울기를 조절하고 라벨과 테두리를 켜고 끌 수 있습니다
         </p>
       </div>
