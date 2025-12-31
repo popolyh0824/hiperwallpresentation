@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Monitor, Users, Grid3x3, Layers, Tag, Frame, Database, Zap, ArrowRight, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -688,6 +690,7 @@ function VersionComparisonButtons() {
 
 export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -710,11 +713,40 @@ export default function Presentation() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
   }
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStart !== null) {
+      const touchCurrent = e.targetTouches[0].clientX
+      if (Math.abs(touchStart - touchCurrent) > 10) {
+        e.preventDefault()
+      }
+    }
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return
+    const touchEnd = e.changedTouches[0].clientX
+    const distance = touchStart - touchEnd
+
+    if (distance > 50) {
+      nextSlide()
+    } else if (distance < -50) {
+      prevSlide()
+    }
+    setTouchStart(null)
+  }
+
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-2 sm:p-4">
-      {/* Slide Container */}
+    <main
+      className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-2 sm:p-4"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="w-full max-w-[95vw] min-h-[90vh] md:h-[85vh] bg-white dark:bg-slate-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300">
-        {/* Header */}
         <header className="px-4 sm:px-8 py-4 sm:py-6 border-b flex items-center justify-between bg-white dark:bg-slate-900 sticky top-0 z-10">
           <div className="flex items-center gap-2 sm:gap-3">
             <Monitor className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
@@ -727,7 +759,6 @@ export default function Presentation() {
           </div>
         </header>
 
-        {/* Slide Content */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 scrollbar-thin">
           <div className="h-full flex flex-col max-w-5xl mx-auto">
             <h2 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-10 text-slate-800 dark:text-slate-100">
@@ -738,6 +769,29 @@ export default function Presentation() {
             </div>
           </div>
         </div>
+
+        <footer className="px-8 py-4 border-t flex items-center justify-between bg-white dark:bg-slate-900">
+          <div className="hidden sm:flex gap-2">
+            <Button onClick={prevSlide} variant="outline" size="sm">
+              이전
+            </Button>
+            <Button onClick={nextSlide} variant="outline" size="sm">
+              다음
+            </Button>
+          </div>
+          <div className="sm:hidden text-xs text-muted-foreground animate-pulse">← 좌우로 밀어서 슬라이드 이동 →</div>
+          <div className="flex gap-1">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentSlide(i)}
+                className={`h-2 w-2 rounded-full transition-all ${
+                  currentSlide === i ? "bg-blue-600 w-4" : "bg-slate-300 dark:bg-slate-700"
+                }`}
+              />
+            ))}
+          </div>
+        </footer>
       </div>
     </main>
   )
