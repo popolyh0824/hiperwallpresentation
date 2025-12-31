@@ -76,24 +76,26 @@ export function DragDropDemo() {
   }
 
   return (
-    <div className="flex gap-6">
-      <div className="w-48 space-y-2">
-        <div className="text-sm font-semibold mb-3 text-muted-foreground">콘텐츠 목록</div>
-        {contentItems.map((item) => (
-          <div
-            key={item.id}
-            draggable
-            onDragStart={() => handleDragStart(item)}
-            onDragEnd={handleDragEnd}
-            className={`${item.color} text-white p-3 rounded-lg cursor-move hover:opacity-80 transition-opacity flex items-center gap-2 text-sm font-medium`}
-          >
-            {item.icon}
-            {item.name}
-          </div>
-        ))}
+    <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+      <div className="w-full md:w-48 space-y-2">
+        <div className="text-sm font-semibold mb-2 md:mb-3 text-muted-foreground">콘텐츠 목록</div>
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-2">
+          {contentItems.map((item) => (
+            <div
+              key={item.id}
+              draggable
+              onDragStart={() => handleDragStart(item)}
+              onDragEnd={handleDragEnd}
+              className={`${item.color} text-white p-2 md:p-3 rounded-lg cursor-move hover:opacity-80 transition-opacity flex items-center gap-2 text-xs md:text-sm font-medium touch-none`}
+            >
+              {item.icon}
+              {item.name}
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-3">
           <div className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
             <Monitor className="h-4 w-4" />

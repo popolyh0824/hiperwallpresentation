@@ -1,20 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import {
-  ChevronLeft,
-  ChevronRight,
-  Monitor,
-  Users,
-  Grid3x3,
-  Layers,
-  Tag,
-  Frame,
-  Database,
-  Zap,
-  ArrowRight,
-  Info,
-} from "lucide-react"
+import { Monitor, Users, Grid3x3, Layers, Tag, Frame, Database, Zap, ArrowRight, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DragDropDemo } from "@/components/drag-drop-demo"
 import { VersionModal } from "@/components/version-modal"
@@ -699,7 +686,7 @@ function VersionComparisonButtons() {
   )
 }
 
-export default function PresentationPage() {
+export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
@@ -724,66 +711,34 @@ export default function PresentationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex flex-col">
+    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-2 sm:p-4">
       {/* Slide Container */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-6xl aspect-[16/9] bg-white dark:bg-slate-950 rounded-2xl shadow-2xl overflow-hidden">
-          {/* Slide Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
-            <h1 className="text-3xl font-bold">{slides[currentSlide].title}</h1>
-            {slides[currentSlide].subtitle && (
-              <p className="text-xl mt-2 opacity-90">{slides[currentSlide].subtitle}</p>
-            )}
+      <div className="w-full max-w-[95vw] min-h-[90vh] md:h-[85vh] bg-white dark:bg-slate-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300">
+        {/* Header */}
+        <header className="px-4 sm:px-8 py-4 sm:py-6 border-b flex items-center justify-between bg-white dark:bg-slate-900 sticky top-0 z-10">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Monitor className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+            <h1 className="text-lg sm:text-2xl font-bold truncate max-w-[200px] sm:max-w-none">
+              Hiperwall 신기능 발표
+            </h1>
           </div>
+          <div className="text-xs sm:text-sm font-medium text-muted-foreground bg-slate-100 dark:bg-slate-800 px-2 sm:px-4 py-1 sm:py-2 rounded-full">
+            슬라이드 {currentSlide + 1} / {slides.length}
+          </div>
+        </header>
 
-          {/* Slide Content */}
-          <div className="p-12 h-[calc(100%-88px)] overflow-auto">{slides[currentSlide].content}</div>
+        {/* Slide Content */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 scrollbar-thin">
+          <div className="h-full flex flex-col max-w-5xl mx-auto">
+            <h2 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-10 text-slate-800 dark:text-slate-100">
+              {slides[currentSlide].title}
+            </h2>
+            <div className="flex-1 animate-in fade-in slide-in-from-right-8 duration-500">
+              {slides[currentSlide].content}
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Navigation Controls */}
-      <div className="pb-8 px-8">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Button
-            onClick={prevSlide}
-            disabled={currentSlide === 0}
-            variant="outline"
-            size="lg"
-            className="gap-2 bg-transparent"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            이전
-          </Button>
-
-          <div className="flex items-center gap-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentSlide ? "w-8 bg-blue-600" : "w-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400"
-                }`}
-                aria-label={`슬라이드 ${index + 1}로 이동`}
-              />
-            ))}
-          </div>
-
-          <Button
-            onClick={nextSlide}
-            disabled={currentSlide === slides.length - 1}
-            variant="outline"
-            size="lg"
-            className="gap-2 bg-transparent"
-          >
-            다음
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        </div>
-
-        <div className="text-center mt-4 text-sm text-muted-foreground">
-          {currentSlide + 1} / {slides.length} | 키보드 화살표 또는 스페이스바로 이동
-        </div>
-      </div>
-    </div>
+    </main>
   )
 }
