@@ -27,6 +27,7 @@ interface PlacedContent {
 
 export function DragDropDemo() {
   const [draggedItem, setDraggedItem] = useState<ContentItem | null>(null)
+  const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null)
   const [hoveredCell, setHoveredCell] = useState<{ row: number; col: number } | null>(null)
   const [rows, setRows] = useState(2)
   const [cols, setCols] = useState(3)
@@ -36,15 +37,21 @@ export function DragDropDemo() {
     setRows(newRows)
     setCols(newCols)
     setPlacedContent([])
+    setSelectedItem(null)
   }
 
   const handleDragStart = (item: ContentItem) => {
     setDraggedItem(item)
+    setSelectedItem(item)
   }
 
   const handleDragEnd = () => {
     setDraggedItem(null)
     setHoveredCell(null)
+  }
+
+  const handleItemClick = (item: ContentItem) => {
+    setSelectedItem(selectedItem?.id === item.id ? null : item)
   }
 
   const handleDragOver = (e: React.DragEvent, row: number, col: number) => {
@@ -57,16 +64,18 @@ export function DragDropDemo() {
   }
 
   const handleDrop = (row: number, col: number) => {
-    if (draggedItem && !isOccupied(row, col)) {
+    const itemToPlace = draggedItem || selectedItem
+    if (itemToPlace && !isOccupied(row, col)) {
       setPlacedContent([
         ...placedContent,
         {
-          content: draggedItem,
+          content: itemToPlace,
           row,
           col,
         },
       ])
       setDraggedItem(null)
+      setSelectedItem(null)
       setHoveredCell(null)
     }
   }
@@ -86,7 +95,12 @@ export function DragDropDemo() {
               draggable
               onDragStart={() => handleDragStart(item)}
               onDragEnd={handleDragEnd}
-              className={`${item.color} text-white p-2 md:p-3 rounded-lg cursor-move hover:opacity-80 transition-opacity flex items-center gap-2 text-xs md:text-sm font-medium touch-none`}
+              onClick={() => handleItemClick(item)}
+              className={`${item.color} text-white p-2 md:p-3 rounded-lg cursor-move hover:opacity-80 transition-all flex items-center gap-2 text-xs md:text-sm font-medium touch-none ${
+                selectedItem?.id === item.id
+                  ? "ring-4 ring-primary ring-offset-2 ring-offset-background scale-105 shadow-lg"
+                  : ""
+              }`}
             >
               {item.icon}
               {item.name}
@@ -150,11 +164,12 @@ export function DragDropDemo() {
                   key={`${r}-${c}`}
                   onDragOver={(e) => handleDragOver(e, r, c)}
                   onDrop={() => handleDrop(r, c)}
-                  className={`aspect-video rounded border-2 transition-all ${
-                    hoveredCell?.row === r && hoveredCell?.col === c
-                      ? "border-blue-500 bg-blue-100 dark:bg-blue-900"
+                  onClick={() => !placedItem && handleDrop(r, c)}
+                  className={`aspect-video rounded border-2 transition-all cursor-pointer ${
+                    (hoveredCell?.row === r && hoveredCell?.col === c) || (selectedItem && !placedItem)
+                      ? "border-blue-500 bg-blue-100/50 dark:bg-blue-900/50"
                       : "border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-950"
-                  }`}
+                  } ${selectedItem && !placedItem ? "hover:bg-blue-200 dark:hover:bg-blue-800" : ""}`}
                 >
                   {placedItem ? (
                     <div
@@ -166,8 +181,8 @@ export function DragDropDemo() {
                       <div className="text-[10px] mt-1 opacity-70">(클릭: 제거)</div>
                     </div>
                   ) : (
-                    <div className="h-full flex items-center justify-center text-slate-400 dark:text-slate-600 text-xs">
-                      드롭
+                    <div className="h-full flex items-center justify-center text-slate-400 dark:text-slate-600 text-[10px] md:text-xs">
+                      {selectedItem ? "여기에 배치" : "드롭 영역"}
                     </div>
                   )}
                 </div>
@@ -176,7 +191,7 @@ export function DragDropDemo() {
           </div>
         </div>
         <div className="mt-3 text-xs text-muted-foreground">
-          💡 콘텐츠를 드래그하여 그리드에 배치하세요. 클릭하면 제거됩니다.
+          💡 콘텐츠를 드래그하거나 선택 후 빈 칸을 터치하여 배치하세요.
         </div>
       </div>
     </div>

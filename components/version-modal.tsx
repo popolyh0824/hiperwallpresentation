@@ -130,10 +130,10 @@ export function VersionModal({ version, isOpen, onClose }: VersionModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 md:p-6 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold">{details.title}</h2>
-            <p className="text-sm opacity-90 mt-1">이전 버전: {details.previousVersion}</p>
+            <h2 className="text-xl sm:text-2xl font-bold">{details.title}</h2>
+            <p className="text-xs sm:text-sm opacity-90 mt-1">이전 버전: {details.previousVersion}</p>
           </div>
           <Button onClick={onClose} variant="ghost" size="icon" className="text-white hover:bg-white/20">
             <X className="h-6 w-6" />
@@ -141,25 +141,29 @@ export function VersionModal({ version, isOpen, onClose }: VersionModalProps) {
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div className="p-4 md:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           {/* Key Improvement */}
-          <div className="bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-4 rounded-r-lg mb-6">
-            <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">핵심 개선사항</h3>
-            <p className="text-yellow-900 dark:text-yellow-100">{details.keyImprovement}</p>
+          <div className="bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-3 md:p-4 rounded-r-lg mb-4 md:mb-6">
+            <h3 className="text-sm sm:text-base font-semibold text-yellow-800 dark:text-yellow-200 mb-1 md:mb-2">
+              핵심 개선사항
+            </h3>
+            <p className="text-sm sm:text-base text-yellow-900 dark:text-yellow-100">{details.keyImprovement}</p>
           </div>
 
           {/* New Features */}
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <div className="mb-4 md:mb-6">
+            <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 flex items-center gap-2">
               <span className="text-green-600">✨</span>
               새로운 기능
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               {details.newFeatures.map((feature, index) => (
-                <div key={index} className="bg-slate-50 dark:bg-slate-800 p-4 rounded-lg">
-                  <h4 className="font-semibold text-lg text-blue-600 dark:text-blue-400 mb-1">{feature.name}</h4>
-                  <p className="text-sm text-muted-foreground mb-2">{feature.description}</p>
-                  <p className="text-sm">
+                <div key={index} className="bg-slate-50 dark:bg-slate-800 p-3 md:p-4 rounded-lg">
+                  <h4 className="font-semibold text-base sm:text-lg text-blue-600 dark:text-blue-400 mb-1">
+                    {feature.name}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1 md:mb-2">{feature.description}</p>
+                  <p className="text-xs sm:text-sm">
                     <strong>효과:</strong> {feature.impact}
                   </p>
                 </div>
@@ -169,15 +173,18 @@ export function VersionModal({ version, isOpen, onClose }: VersionModalProps) {
 
           {/* Changes from Previous Version */}
           <div>
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <h3 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 flex items-center gap-2">
               <span className="text-blue-600">🔄</span>
               이전 버전과의 차이점
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               {details.changes.map((change, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                  <span className="text-blue-600 font-bold">→</span>
-                  <span>{change}</span>
+                <div
+                  key={index}
+                  className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-blue-50 dark:bg-blue-950 rounded-lg"
+                >
+                  <span className="text-blue-600 font-bold text-sm sm:text-base">→</span>
+                  <span className="text-sm sm:text-base">{change}</span>
                 </div>
               ))}
             </div>

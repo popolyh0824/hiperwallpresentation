@@ -14,39 +14,40 @@ const slides = [
     title: "",
     subtitle: "", // removed redundant subtitle
     content: (
-      <div className="flex flex-col items-center justify-center h-full">
-        <div className="text-8xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-gradient-x">
+      <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+        <div className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[12rem] font-black bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-gradient-x leading-tight tracking-tighter">
           Hiperwall
         </div>
+        <div className="w-24 h-1 sm:w-32 md:w-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4 md:mt-8 opacity-50" />
       </div>
     ),
   },
   {
     title: "1. 개요",
     content: (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <h3 className="text-3xl font-semibold text-blue-600 flex items-center gap-3">
-            <Monitor className="h-8 w-8" />
+      <div className="space-y-6 md:space-y-8">
+        <div className="space-y-3 md:space-y-4">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-600 flex items-center gap-2 md:gap-3">
+            <Monitor className="h-6 w-6 md:h-8 md:w-8" />
             Hiperwall란?
           </h3>
-          <ul className="space-y-3 text-xl ml-8">
-            <li className="flex items-start gap-3">
+          <ul className="space-y-2 md:space-y-3 text-base sm:text-lg md:text-xl ml-4 md:ml-8">
+            <li className="flex items-start gap-2 md:gap-3">
               <span className="text-blue-500 mt-1">•</span>
               <span>비디오 월(Video Wall) 관리 소프트웨어</span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-2 md:gap-3">
               <span className="text-blue-500 mt-1">•</span>
               <span>여러 디스플레이를 하나의 대형 화면으로 통합 제어</span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-2 md:gap-3">
               <span className="text-blue-500 mt-1">•</span>
               <span>버전 8.0 → 8.5 → 9.0으로 진화하며 강력한 기능 추가</span>
             </li>
           </ul>
         </div>
-        <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg">
-          <p className="text-lg leading-relaxed">
+        <div className="bg-blue-50 dark:bg-blue-950 p-4 md:p-6 rounded-lg">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             Hiperwall은 통제실, 회의실, 모니터링 센터 등에서 사용되는 대형 비디오 월을 효율적으로 관리하는
             엔터프라이즈급 솔루션입니다. 최근 3개 메이저 버전을 통해 단순한 디스플레이 관리를 넘어 다중 사용자 협업,
             직관적인 UI, 그리고 유연한 구성 관리 기능을 갖춘 종합 플랫폼으로 발전했습니다.
@@ -59,27 +60,27 @@ const slides = [
   {
     title: "2. Version 8.0 - HiperZones",
     content: (
-      <div className="space-y-6">
-        <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg">
-          <h3 className="text-2xl font-semibold text-blue-600 mb-4 flex items-center gap-3">
-            <Grid3x3 className="h-7 w-7" />
+      <div className="space-y-4 md:space-y-6">
+        <div className="bg-blue-50 dark:bg-blue-950 p-4 md:p-6 rounded-lg">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-blue-600 mb-2 md:mb-4 flex items-center gap-2 md:gap-3">
+            <Grid3x3 className="h-6 w-6 md:h-7 md:w-7" />
             독립적인 영역(Zone) 관리 시스템
           </h3>
-          <p className="text-lg mb-4 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg mb-3 md:mb-4 leading-relaxed">
             HiperZones는 8.0 버전의 가장 혁신적인 기능으로, 하나의 비디오 월을 논리적으로 분할하여 각 영역을 독립적으로
             관리할 수 있게 합니다. 이를 통해 여러 팀이 동시에 작업하면서도 서로의 콘텐츠를 방해하지 않는 안전한 협업
             환경을 제공합니다.
           </p>
-          <ul className="space-y-3 text-lg ml-6">
-            <li className="flex items-start gap-3">
+          <ul className="space-y-2 md:space-y-3 text-sm sm:text-base md:text-lg ml-4 md:ml-6">
+            <li className="flex items-start gap-2 md:gap-3">
               <span className="text-blue-500">✓</span>
               <span>하나의 비디오 월을 여러 독립 영역으로 분할</span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-2 md:gap-3">
               <span className="text-blue-500">✓</span>
               <span>각 영역을 다른 사용자가 동시에 제어 가능</span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-2 md:gap-3">
               <span className="text-blue-500">✓</span>
               <span>한 영역의 콘텐츠가 다른 영역에 간섭하지 않음</span>
             </li>

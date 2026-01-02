@@ -11,6 +11,7 @@ export function LabelBorderDemo() {
   const [showBorder, setShowBorder] = useState(true)
   const [contentOpacity, setContentOpacity] = useState(100)
   const [rotation, setRotation] = useState(0)
+  const [scale, setScale] = useState(100)
 
   return (
     <div className="space-y-4">
@@ -60,7 +61,7 @@ export function LabelBorderDemo() {
 
       <div className="space-y-3 border-t pt-4">
         <h4 className="font-semibold text-sm text-green-600">콘텐츠 설정</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="space-y-2">
             <label className="text-xs font-medium">콘텐츠 불투명도: {contentOpacity}%</label>
             <Slider
@@ -68,6 +69,17 @@ export function LabelBorderDemo() {
               onValueChange={(value) => setContentOpacity(value[0])}
               min={0}
               max={100}
+              step={5}
+              className="w-full h-8"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-medium">콘텐츠 확대/축소: {scale}%</label>
+            <Slider
+              value={[scale]}
+              onValueChange={(value) => setScale(value[0])}
+              min={10}
+              max={200}
               step={5}
               className="w-full h-8"
             />
@@ -87,14 +99,14 @@ export function LabelBorderDemo() {
       </div>
 
       {/* Preview */}
-      <div className="bg-slate-100 dark:bg-slate-800 p-6 sm:p-12 rounded-lg overflow-hidden flex items-center justify-center min-h-[250px]">
+      <div className="bg-slate-100 dark:bg-slate-800 p-6 sm:p-12 rounded-lg overflow-hidden flex items-center justify-center min-h-[300px]">
         <div
           className="relative h-32 w-48 sm:h-40 sm:w-64 rounded transition-transform shrink-0"
           style={{
             borderWidth: showBorder ? "4px" : "0",
             borderColor: "rgb(239, 68, 68)",
             borderStyle: "solid",
-            transform: `rotate(${rotation}deg)`,
+            transform: `rotate(${rotation}deg) scale(${scale / 100})`,
           }}
         >
           {/* Background layer with opacity */}
