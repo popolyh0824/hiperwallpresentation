@@ -769,23 +769,22 @@ export default function Presentation() {
           </div>
         </div>
 
-        <footer className="px-8 py-4 border-t flex items-center justify-between bg-white dark:bg-slate-900">
-          <div className="hidden sm:flex gap-2">
-            <Button onClick={prevSlide} variant="outline" size="sm">
+        <footer className="px-4 sm:px-8 py-4 border-t flex items-center justify-between bg-white dark:bg-slate-900">
+          <div className="flex gap-2">
+            <Button onClick={prevSlide} variant="outline" size="sm" className="h-9 px-4 bg-transparent">
               이전
             </Button>
-            <Button onClick={nextSlide} variant="outline" size="sm">
+            <Button onClick={nextSlide} variant="outline" size="sm" className="h-9 px-4 bg-transparent">
               다음
             </Button>
           </div>
-          <div className="sm:hidden text-xs text-muted-foreground animate-pulse">← 좌우로 밀어서 슬라이드 이동 →</div>
-          <div className="flex gap-1">
+          <div className="flex gap-1.5 sm:gap-1">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentSlide(i)}
                 className={`h-2 w-2 rounded-full transition-all ${
-                  currentSlide === i ? "bg-blue-600 w-4" : "bg-slate-300 dark:bg-slate-700"
+                  currentSlide === i ? "bg-blue-600 w-4 sm:w-4" : "bg-slate-300 dark:bg-slate-700"
                 }`}
               />
             ))}
