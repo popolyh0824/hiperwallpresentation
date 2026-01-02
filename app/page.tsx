@@ -11,15 +11,13 @@ import { LabelBorderDemo } from "@/components/label-border-demo"
 
 const slides = [
   {
-    title: "Hiperwall 소프트웨어",
-    subtitle: "v8.0 ~ v9.0 주요 신기능",
+    title: "",
+    subtitle: "", // removed redundant subtitle
     content: (
-      <div className="flex flex-col items-center justify-center h-full gap-8">
-        <div className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <div className="flex flex-col items-center justify-center h-full">
+        <div className="text-8xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-gradient-x">
           Hiperwall
         </div>
-        <div className="text-3xl text-muted-foreground">비디오 월 관리 솔루션</div>
-        <div className="text-xl text-muted-foreground mt-8">버전 8.0 → 8.5 → 9.0</div>
       </div>
     ),
   },
@@ -751,7 +749,7 @@ export default function Presentation() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Monitor className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
             <h1 className="text-lg sm:text-2xl font-bold truncate max-w-[200px] sm:max-w-none">
-              Hiperwall 신기능 발표
+              Hiperwall 솔루션 소개
             </h1>
           </div>
           <div className="text-xs sm:text-sm font-medium text-muted-foreground bg-slate-100 dark:bg-slate-800 px-2 sm:px-4 py-1 sm:py-2 rounded-full">
